@@ -1,19 +1,19 @@
-## KAG API documentation
+# KAG API documentation
 
 Test
 
-## Classes
+# Classes
 
-### CBlob
+## CBlob
 
-#### Functions
+### Functions
 
-#### Variables
+### Variables
 
-## Global variables
+# Global variables
 
-## Global functions
+# Global functions
 
-## Hooks
+# Hooks
 
-### `void onInit(CRules@ this)`
+## `void onInit(CRules@ this)`
