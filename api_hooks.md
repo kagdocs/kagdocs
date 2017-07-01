@@ -1,5 +1,7 @@
 # Script hooks
 
+Script hooks are entry point functions for the engine that can be defined script-side. These are called over specific events over scripts as long they are included to a configuration as the right type (rules script, blob script, etc.).
+
 ## `onInit`
 
 ## `onTick`
