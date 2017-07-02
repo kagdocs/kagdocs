@@ -54,8 +54,11 @@ while 1:
 
 Example usage: `python tcpr.py localhost 50301`
 
-As expected, clients receive the broadcasted message correctly. You should see something like this:  
-![TCPR messages in chat](chatexample.png)
+As expected, clients receive the broadcasted message correctly. You should see something like this in the chat console:
+
+	* Hi!
+	* Hello!
+	* Hello world!
 
 You should also receive player messages along with other servers logs, including TCPR feedback:
 
