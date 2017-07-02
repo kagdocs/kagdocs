@@ -18,7 +18,7 @@ There seems to be a weird exception to the `[HH:MM:SS] ` format: When the server
 {: .warning }
 
 The TCPR server shouldn't be able to send messages (or lines?) [longer than ~16k bytes (probably 16384)](https://forum.thd.vg/threads/build-1865-engine-update-sponges-in-tdm-windows-modded-server-fixes.25483/).  
-It is possible to get lines over that size to be truncated or even not sent at all.
+It is possible to get lines over that size to be truncated, split into multiple packets or even not sent at all.
 {: .error }
 
 It is possible that the server sends multiple messages within a packet, separated by newline characters.  
