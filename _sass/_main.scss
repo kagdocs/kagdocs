@@ -224,6 +224,13 @@ h3 .endpoint {
 	}
 }
 
+.endpoint.cl {
+	color: #FFCF0F
+	&:after {
+		content: "cl";
+	}
+}
+
 .main {
 	margin: 0 0 0 210px;
 	border-left: 1px solid #eee;
@@ -319,7 +326,7 @@ hr {
 	h3 {
 		margin: 0 0;
 	}
-	
+
 	pre {
 		 border: 0px;
 		 box-shadow: 0 0 0 1px #eee;

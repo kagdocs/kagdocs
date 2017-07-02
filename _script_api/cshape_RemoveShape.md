@@ -1,6 +1,6 @@
 ---
 title: CShape::RemoveShape
-position: 2
+position: 2.1
 type: fn
 description: Remove a shape
 right_code: |

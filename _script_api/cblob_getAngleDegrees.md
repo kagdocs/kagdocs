@@ -1,6 +1,6 @@
 ---
 title: CBlob::getAngleDegrees
-position: 1
+position: 1.1
 type: fn
 description: Get the blob angle in degrees
 right_code: |

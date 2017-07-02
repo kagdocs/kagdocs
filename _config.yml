@@ -38,3 +38,4 @@ defaults:
 types:
   - fn
   - var
+  - cl

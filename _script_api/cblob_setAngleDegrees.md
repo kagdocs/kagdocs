@@ -1,6 +1,6 @@
 ---
 title: CBlob::setAngleDegrees
-position: 1
+position: 1.1
 type: fn
 description: Set the blob angle in degrees
 right_code: |
