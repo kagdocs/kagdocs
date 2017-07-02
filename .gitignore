@@ -1,4 +1,4 @@
 .directory
 Gemfile.lock
 _site/
-.sass_cache/
+.sass-cache/
