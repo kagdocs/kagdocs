@@ -14,7 +14,7 @@ You can receive logs, but not send commands when you are not authenticated (so a
 
 Received messages are generally always prefixed by the current time, in the `[HH:MM:SS] ` format.
 
-There seems to be a weird exception to the [HH:MM:SS] format: When the server shuts down, it sends `HH:MM:SSTCPR: server shutting down.` without the brackets `[]` and the space following the end bracket.
+There seems to be a weird exception to the `[HH:MM:SS] ` format: When the server shuts down, it sends `HH:MM:SSTCPR: server shutting down.` without the brackets `[]` and the space following the end bracket.
 {: .warning }
 
 The TCPR server shouldn't be able to send messages (or lines?) [longer than ~16k bytes (probably 16384)](https://forum.thd.vg/threads/build-1865-engine-update-sponges-in-tdm-windows-modded-server-fixes.25483/).  
