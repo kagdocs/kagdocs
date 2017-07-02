@@ -47,55 +47,10 @@ jQuery(function() {
 		});
 	}
 
-	var href = $('.sidebar a').first().attr("href");
-
-	if (href !== undefined && href.charAt(0) === "#") {
-		setActiveSidebarLink();
-
-		$(window).on("scroll", function(evt) {
-			setActiveSidebarLink();
-		});
-	}
-
-	function setActiveSidebarLink() {
-			$('.sidebar a').removeClass('active');
-				var $closest = getClosestHeader();
-				$closest.addClass('active');
-				document.title = $closest.text();
-
-	}
+	// TODO bad at js, can that be improved?
+	$('.sidebar a').click(function() {
+		$('.sidebar a').removeClass('active');
+		$(this).addClass('active');
+		document.title = $(this).text() + " - KAG Docs";
+	});
 });
-
-function getClosestHeader() {
-	var $links = $('.sidebar a'),
-	top = window.scrollY,
-	$last = $links.first();
-	
-	if (top == 0) {
-		return $links.first();
-	}
-
-	if (top + window.innerHeight >= $(".main").height()) {
-		return $links.last();
-	}
-
-	for (var i = 0; i < $links.length; i++) {
-		var $link = $links.eq(i),
-		href = $link.attr("href");
-
-		if (href !== undefined && href.charAt(0) === "#" && href.length > 1) {
-			var $anchor = $(href);
-
-			if ($anchor.length > 0) {
-				var offset = $anchor.offset();
-
-				if (top < offset.top - (window.innerHeight / 2)) {
-					return $last;
-				}
-
-				$last = $link;
-			}
-		}
-	}
-	return $last;
-}
