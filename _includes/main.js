@@ -1,6 +1,6 @@
 var sidebar = document.getElementById('sidebar');
 
-sidebar.addEventListener("click", function()
+sidebar.addEventListener("click", function(event)
 {
 	if (event.target.nodeName == "H6")
 	{
