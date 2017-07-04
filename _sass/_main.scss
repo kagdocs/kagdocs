@@ -114,13 +114,6 @@ a:hover {
 	color: #0FA0CE; text-decoration: underline;
 }
 
-pre {
-	white-space: pre-wrap;
-	font-size: 1em;
-	margin: 22px 0;
-	word-wrap: break-word;
-}
-
 dl {
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
@@ -330,13 +323,6 @@ hr {
 	h3 {
 		margin: 0 0;
 	}
-
-	pre {
-		 border: 0px;
-		 box-shadow: 0 0 0 1px #eee;
-		 border-radius: 3px;
-		 padding: 10px;
-	}
 }
 
 .right-code {
@@ -350,60 +336,12 @@ hr {
 	code {
 		color: #fff;
 	}
-
-	pre {
-		background: black;
-		padding: 10px;
-		border-radius: 5px;
-	}
-
-	.code-viewer .languages li a:hover {
-		border-color: #555;
-	}
 }
 
-.code-viewer {
-	.languages {
-		padding: 0;
-		margin: 0 0 5px 0;
-		list-style: none;
-		font-size: .9em;
-
-		li {
-			display: inline-block;
-
-			a {
-				display: block;
-				padding: 5px 10px;
-				z-index: 100;
-				border: 1px solid transparent;
-
-				&:hover {
-					border-color: #eee;
-					border-radius: 5px;
-				}
-
-				&.active:hover {
-					border-color: transparent;
-				}
-			}
-		}
-	}
-
-	a {
-		text-decoration: none;
-		color: #aaa;
-
-		&:hover {
-			color: #222;
-		}
-
-
-	}
-
-	pre {
-		margin: 0 0 20px 0;
-	}
+pre {
+	background: black;
+	padding: 10px;
+	border-radius: 5px;
 }
 
 .code-viewer a.active, .code-viewer a.active:hover, .right-code .code-viewer a.active:hover {
