@@ -19,3 +19,7 @@ This function has to be called client-side as well when handling player blobs, o
 {: .info }
 
 A positive angle value will rotate the blob clockwise.
+
+~~~ cpp
+hello, world!
+~~~
