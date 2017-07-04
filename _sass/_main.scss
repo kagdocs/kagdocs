@@ -148,11 +148,29 @@ dl dd:after {
 }
 
 .sidebar h6 {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	line-height: 1em;
 	font-size: 1.5rem;
 	letter-spacing: 1px;
 	color: #888;
 	font-weight: bold;
+}
+
+.sidebar h6:hover {
+	color: #999;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.sidebar h6.folded {
+	color: #AAA;
+}
+
+.sidebar h6.folded:hover {
+	color: #777;
 }
 
 .sidebar {
@@ -184,11 +202,11 @@ dl dd:after {
 		text-overflow: ellipsis;
 		overflow: hidden;
 		padding: 1px 0;
+	}
 
-		&.active {
-			color: #2196F3;
-			text-decoration: none;
-		}
+	li:active a {
+		color: #2196F3;
+		text-decoration: none;
 	}
 }
 

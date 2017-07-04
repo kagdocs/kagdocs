@@ -1,10 +1,20 @@
-var sidebar = document.getElementById('sidebar'),
-	lastActive;
+var sidebar = document.getElementById('sidebar');
 
 sidebar.addEventListener("click", function()
 {
-	if (lastActive)
-		lastActive.classList.remove('active');
+	if (event.target.nodeName == "H6")
+	{
+		var ul = event.target.nextElementSibling;
 
-	(lastActive = event.target).classList.add('active');
+		if (ul.style.display == "none")
+		{
+			event.target.classList.remove("folded");
+			ul.style.display = "block";
+		}
+		else
+		{
+			event.target.classList.add("folded");
+			ul.style.display = "none";
+		}
+	}
 });
