@@ -78,11 +78,8 @@
 	}
 
 	window.index = lunr(function () {
-		this.field("id");
 		this.field("title", {boost: 10});
-		this.field("category");
-		this.field("url");
-		this.field("content");
+		this.field("description");
 	});
 
 	var query = decodeURIComponent((getQueryVariable("q") || "").replace(/\+/g, "%20")),

@@ -6,7 +6,7 @@ permalink: /search/
 
 <div class="search-page">
 	<h2>Search Results</h2>
-	
+
 	<p><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></p>
 	<ul id="search-results"></ul>
 </div>
@@ -22,11 +22,9 @@ permalink: /search/
 						"{{ item.id | slugify }}": {
 							"id": "{{ item.id | slugify }}",
 							"title": "{{ item.title | xml_escape }}",
-							"category": "{{ collection.label | xml_escape }}",
 							"description": "{{item.description | xml_escape }}",
 		  				"type": "{{item.type | xml_escape}}",
-							"url": "/#{{ item.id | replace: '/', '' | replace: '.', '' | xml_escape }}",
-							"content": {{ item.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
+							"url": "/#{{ item.id | replace: '/', '' | replace: '.', '' | xml_escape }}"
 						}
 						{% assign added = true %}
 					{% endunless %}
