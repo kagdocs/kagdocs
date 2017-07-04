@@ -4,7 +4,6 @@
 title: KAGDocs
 description: Community-driven KAG Documentation
 url:
-headline: KAGDocs
 permalink: pretty
 
 collections:
@@ -20,9 +19,11 @@ collections:
   tcpr:
     title: TCPR documentation
     position: 4
+
 gems:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-minifier
 
 exclude:
   - readme.md
