@@ -4,7 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
 
+		{% seo %}
+
 		<link rel="stylesheet" href="/css/style.css">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" >
 	</head>
 	<body>
 		<header>
@@ -14,17 +17,10 @@
 			</form>
 
 			{% include sidebar.html %}
-
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-			<script src="/js/main.js"></script>
 		</header>
 		<div class="main">
 			{{ content }}
 		</div>
-		<script>
-			document.getElementById("open-nav").addEventListener("click", function () {
-				document.body.classList.toggle("nav-open");
-			});
-		</script>
+		<script>{% include main.js %}</script>
 	</body>
 </html>

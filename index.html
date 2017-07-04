@@ -1,5 +1,5 @@
 ---
-title: S
+title: Index
 ---
 {% assign sorted_collections = site.collections | sort: "position" %}
 {% for collection in sorted_collections %}
@@ -9,7 +9,13 @@ title: S
 			<section class="left-docs">
 				<h3>
 					<a id="{{ doc.id | replace: '/', '' | replace: '.', '' }}">
-						{{ doc.title }}
+						{% assign title = doc.title | split: '::' %}
+						{% if title.size > 1 %}
+							{% assign ntitle = '<span class="classname">' | append: title.first | append: "::</span>" | append:title.last %}
+							{{ ntitle }}
+						{% else %}
+							{{ title }}
+						{% endif %}
 						{% if doc.type %}
 							<span class="endpoint {{ doc.type }}"></span>
 						{% endif %}

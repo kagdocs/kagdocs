@@ -18,4 +18,4 @@ The angle can still be set though the `CShape` rotations are disabled (through `
 This function has to be called client-side as well when handling player blobs, otherwise only other players will see the sprite rotated.
 {: .info }
 
-A positive angle value will rotate the blob clockwise.  
+A positive angle value will rotate the blob clockwise.
