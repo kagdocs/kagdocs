@@ -11,5 +11,5 @@ Please do note that this documentation is under heavy work. It is therefore not 
 In the mean time, you can help contribute or refer to the `Manual` folder in KAG and to the [official online documentation](doc.kag2d.com).
 {: .warning }
 
-KAG uses AngelScript [`2.27.1`](http://www.angelcode.com/angelscript/sdk/docs/articles/changes2.html) as a scripting language. You may find documentation about it [here](http://www.angelcode.com/angelscript/sdk/docs/manual/doc_script.html).
+KAG uses AngelScript [`2.27.1`](http://www.angelcode.com/angelscript/sdk/docs/articles/changes2.html) as a scripting language. You may find documentation for it [here](http://www.angelcode.com/angelscript/sdk/docs/manual/doc_script.html).
 {: .info }
