@@ -360,6 +360,7 @@ pre {
 	background: black;
 	padding: 10px;
 	border-radius: 5px;
+	overflow-x: auto;
 }
 
 .code-viewer a.active, .code-viewer a.active:hover, .right-code .code-viewer a.active:hover {
