@@ -5,27 +5,31 @@ position: 2
 
 TCPR is a simple TCP protocol. Messages between the TCPR client and server are plain text.
 
-Authentication is performed through plain text. Whenever you want to auth, simply send the RCON password (as defined by `sv_rconpassword`) terminated by a newline character `\n` to the server.  
+Authentication is performed through plain text. Whenever you want to auth, simply send the RCON password (as defined by `sv_rconpassword`) terminated by a newline sent to the server.  
 If the wrong password was entered, the connection will be closed.
 
-It is no more required to auth to receive chat and console logs from the remote server, including `tcpr()` messages.  
-You can receive logs, but not send commands when you are not authenticated (so avoid sending sensitive data).
+The type of newline you are using will be determined by the TCPR server automatically on authenticating.  
+For example, you can use the newline character `\n` as well as `\r\n` (CRLF) during auth, which will be used for [the rest of the session](https://forum.thd.vg/threads/complete-tcpr-documentation.27028/#post-400427).
 {: .info }
 
-Received messages are generally always prefixed by the current time, in the `[HH:MM:SS] ` format.
+Due to a bug, it is no more required to auth to receive chat and console logs from the remote server, including `tcpr()` messages, which will get fixed.  
+You can receive logs, but not send commands when you are not authenticated.
+{: .warning }
+
+Received lines are generally always prefixed by the current time, in the `[HH:MM:SS] ` format.
 
 There seems to be a weird exception to the `[HH:MM:SS] ` format: When the server shuts down, it sends `HH:MM:SSTCPR: server shutting down.` without the brackets `[]` and the space following the end bracket.
 {: .warning }
 
-The TCPR server shouldn't be able to send messages (or lines?) [longer than ~16k bytes (probably 16384)](https://forum.thd.vg/threads/build-1865-engine-update-sponges-in-tdm-windows-modded-server-fixes.25483/).  
-It is possible to get lines over that size to be truncated, split into multiple packets or even not sent at all.
+The TCPR server will split lines [longer than ~16k bytes](https://forum.thd.vg/threads/build-1865-engine-update-sponges-in-tdm-windows-modded-server-fixes.25483/).  
+This limit might be extended in the future, but it is [not recommended](https://forum.thd.vg/threads/complete-tcpr-documentation.27028/#post-400427) to send such chunks of data all at once.
 {: .error }
 
-It is possible that the server sends multiple messages within a packet, separated by newline characters.  
-If you want to parse server output, you might need to split the server output by the newline character.
+You might receive multiple lines in a single "message" within your application.  
+If you want to parse server output, you might need to split the server output by the newline character '\n'.
 {: .info }
 
-You can send commands terminated by the newline `\n` character. KAG built-in commands can be invoked as long as they're prefixed by a slash `/` character, and arbitrary AngelScript code simply does not begin by `/`. In other words, commands works the same way as from the RCON console, minus the `/rcon` command that is run client-side.  
+You can send commands terminated by a newline. KAG built-in commands can be invoked as long as they're prefixed by a slash `/` character, and arbitrary AngelScript code simply does not begin by `/`. In other words, commands works the same way as from the RCON console, minus the `/rcon` command that is run client-side.  
 You may get a list of commands using `/help` or `/list`.
 
 `" "` within commands is broken through RCON, but it works fine through TCPR.
