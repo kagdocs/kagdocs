@@ -4,69 +4,97 @@ position: 3
 ---
 
 In order to use TCP sockets in Python, you will need to import the `socket` library.  
-This script will read chat and console logs from TCPR, and periodically broadcast a message to players.
+This script will read chat and console logs from TCPR. It will print to the logs whenever a chat message is detected, and if the chat message is '!help', it will broadcast a message.
 The first argument passed to the script will be the ip address and the second argument will be the port to connect to, and read the password from the standard input.
 
 ~~~ python
 #!/usr/bin/python
 
-import threading # Timer
-import socket # TCP sockets
-import sys # argv and exit
-import random # randint
+import socket
+import sys
+import re # Regular expression
 
-def sendRandomMessages(sock, messages):
-	# Get the function to be called every 5 seconds
-	threading.Timer(5, sendRandomMessages, [sock, messages]).start()
-	# Messages also are terminated by \n.
-	sock.send(("/msg " + messages[random.randint(0, len(messages) - 1)] + "\n").encode())
+# Read from the socket until the newline character.
+# Unfortunately python sockets doesn't have a simple feature for that.
+def readUntilNewline(sock, rest):
+	# Get the rest data from the last read, splitted over '\n'.
+	# So if there is more than one element in rest, we have a line ready.
+	if len(rest) >= 2:
+		# Tuple, first element is the requested line, second is the rest
+		return (rest[0], rest[1:])
 
-if len(sys.argv) < 3:
+	# ... in the other case use it as the beginning of the line to read
+	chunkList = rest
+
+	# Read chunks of data
+	while True:
+		# Receive a data chunk
+		data = sock.recv(1024).decode()
+
+		if not data:
+			raise EOFError("Socket closed")
+
+		chunkList.append(data)
+		tokenized = data.split("\n")
+
+		# We found a '\n' character: return the user the line he wants and the rest data
+		if "\n" in data:
+			# Get every chunk but the last one and add the first part of the latest chunk manually.
+			return ("".join(chunkList[:-1]) + tokenized[0], tokenized[1:])
+
+# Beginning of the script
+if len(sys.argv) <= 2:
 	print("Usage: tcpr.py [server] [port]")
 	sys.exit()
 
 sock = socket.socket()
-sock.connect((sys.argv[1], int(sys.argv[2])))
 
-pwd = input("[TCPR] Enter password (leave empty for no login): ")
-islogged = (len(pwd) != 0)
+try:
+	sock.connect((sys.argv[1], int(sys.argv[2])))
+except ConnectionError:
+	print("[TCPR] Connection error")
+	sys.exit()
 
-if islogged:
-	# Passowrds are terminated by \n.
-	sock.send((pwd + "\n").encode())
-	sendRandomMessages(sock, ["Hello world!", "Hello!", "Hi!", "Welcome!"])
+pwd = input("[TCPR] Enter password: ")
+sock.send((pwd + "\n").encode())
 
-while 1:
-	# Receive 16385 bytes, which should be the maximum amount of data TCPR can send
-	data = sock.recv(16385).decode()
+sock.send("/msg Hello from Python!\n".encode())
 
-	# Exit when no data was received on a message.
-	# This happens when the remote closes the connection,
-	# generally because the server is closing or because the wrong password was entered.
-	if len(data) == 0:
-		print("[TCPR] Terminated")
-		sys.exit()
+rest = []
+try:
+	while True:
+		line, rest = readUntilNewline(sock, rest)
 
-	# Print the log to the standard output
-	# TCPR responses already ends with '\n', so have an empty end string not to have double newline.
-	print(data, end='')
+		# Regular expression search: look up for the chat messages exclusively
+		chatResult = re.search("\[\d{2}:\d{2}:\d{2}\] \<(.*)\> (.*)", line)
+
+		# If the message is really a chat message
+		if chatResult is not None:
+			chatSender = chatResult.group(1)
+			chatMessage = chatResult.group(2)
+
+			print("[App] Received chat message from '", chatSender, "': '", chatMessage, "'", sep="")
+
+			if chatMessage == "!help":
+				sock.send(("/msg Hi, " + chatSender + ", welcome to this server! Some useful info: ...\n").encode())
+
+		print("[Server]", line)
+# Connection lost to the server
+except EOFError:
+	print("[TCPR] Connection lost.")
 ~~~
 
 Example usage: `python tcpr.py localhost 50301`
 
-As expected, clients receive the broadcasted message correctly. You should see something like this in the chat console:
+You should receive player messages along with other servers logs, including TCPR feedback:
 
-	* Hi!
-	* Hello!
-	* Hello world!
-
-You should also receive player messages along with other servers logs, including TCPR feedback:
-
-	[19:13:31] RCON command from 127.0.0.1:41620 :
-	[19:13:31] /msg Welcome!
-	[19:13:31]
-	[19:13:36] RCON command from 127.0.0.1:41620 :
-	[19:13:36] /msg Hello!
-	[19:13:36]
-	[19:13:37] <Asu> hi
-	[19:13:38] <Asu> * hello TCPR *
+	[App] Received chat message from 'FIST! Asu': '!hello'
+	[Server] [15:28:09] <FIST! Asu> !hello
+	[Server] [15:28:10] Config file not found 'help'
+	[Server] [15:28:10] Loading blob config from help...
+	[Server] [15:28:10] ERROR: Blob config not found... help
+	[App] Received chat message from 'FIST! Asu': '!help'
+	[Server] [15:28:10] <FIST! Asu> !help
+	[Server] [15:28:10] RCON command from 127.0.0.1:17576 :
+	[Server] [15:28:10] /msg Hi, FIST! Asu, welcome to this server! Some useful info: ...
+	[Server] [15:28:10]
