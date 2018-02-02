@@ -12,7 +12,7 @@ The TCPR server will determine the newline type depending on what you sent durin
 For example, you can use the newline character `\n` as well as `\r\n` (CRLF) during auth. The setting will then be used for [the rest of the session](https://forum.thd.vg/threads/complete-tcpr-documentation.27028/#post-400427).
 {: .info }
 
-Received lines are generally always prefixed by the current time, in the `[HH:MM:SS] ` format.
+Messages are generally prefixed by the current time, in the `[HH:MM:SS] ` format.
 
 The TCPR server will split lines [longer than ~16k bytes](https://forum.thd.vg/threads/build-1865-engine-update-sponges-in-tdm-windows-modded-server-fixes.25483/).  
 This limit might be extended in the future, but [don't send that much data all at once](https://forum.thd.vg/threads/complete-tcpr-documentation.27028/#post-400427).
